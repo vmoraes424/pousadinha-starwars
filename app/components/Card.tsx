@@ -3,15 +3,22 @@ import { Star } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-export default function Card() {
+interface CardProps {
+  id: number;
+  titulo: string;
+  preco: number;
+  foto: string;
+}
+
+export default function Card({id, titulo, preco, foto}: CardProps) {
   return (
-    <Link href={"/quarto/1"} className='flex flex-col justify-center items-center w-[450px] hover:cursor-pointer'>
+    <Link href={`/quarto/${id}`} className='flex flex-col justify-center items-center w-[450px] hover:cursor-pointer'>
       <div className=''>
-        <img src="./quarto.jpg" alt="" className='w-[450px] h-[270px] bg-white rounded-lg' />
+        <img src={foto} alt="" className='w-[450px] h-[270px] bg-white rounded-lg' />
         <div className='flex justify-between p-2'>
           <div>
-            <h1>Mandalore</h1>
-            <p>R$ 400 per noite</p>
+            <h1>{titulo}</h1>
+            <p>R$ {preco} per noite</p>
           </div>
           <div className='flex gap-1'>
             <Star />

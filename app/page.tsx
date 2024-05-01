@@ -1,8 +1,22 @@
 import { Search } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Card from "./components/Card";
+import { useLogin } from "./hooks/useLogin";
+
+export interface Quarto {
+  id: number;
+  titulo: string;
+  preco: number;
+  foto: string;
+}
 
 export default function Home() {
+
+  const { navigate } = useLogin();
+
+  const data = navigate("/quarto");
+  console.log("🚀 ~ Home ~ data:", data)
+
   return (
     <div className="bg-star-gray min-h-screen">
       <Navbar />
@@ -12,11 +26,7 @@ export default function Home() {
         <input type="text" placeholder="Pesquisar quarto" className="text-black focus:outline-none w-full" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 place-items-center m-auto mt-12 gap-12 w-11/12 mb-24">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      
       </div>
     </div>
   );
