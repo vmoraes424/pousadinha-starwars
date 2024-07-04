@@ -1,17 +1,14 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useState } from "react";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 interface LoginContextType {
   login: (login: string, senha: string) => Promise<any>;
-  navigate: (url: string) => Promise<any>;
-  token: string;
 }
 
 const LoginContext = createContext<LoginContextType>({
   login: async () => {},
-  navigate: async () => {},
-  token: "",
 });
 
 export const useLogin = () => {
@@ -19,9 +16,6 @@ export const useLogin = () => {
 };
 
 export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
-  const URL = "http://localhost:3004";
-  const [token, setToken] = useState("");
-
   const login = async (login: string, senha: string) => {
     try {
       const res = await fetch("http://localhost:3004/login", {
@@ -36,26 +30,23 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       const data = await res.json();
-      setToken(data.token);
+      setCookie(null, "token", data?.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+      setCookie(null, "admin", data?.admin, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+      localStorage.setItem("token", data?.token);
       return data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  async function navigate(url: string) {
-    const res = await fetch(URL + url, {
-      headers: {
-        Authorization: `Bearer ${token ? token : ""}`,
-      },
-    });
-    return res.json();
-  }
-
   const contextValue: LoginContextType = {
     login,
-    navigate,
-    token,
   };
 
   return (
