@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useLogin } from "../hooks/useLogin.tsx";
+import { useLogin } from "../hooks/useLogin";
 
 export default function Login() {
   const [usuario, setUsuario] = React.useState({ login: "", senha: "" });
@@ -12,7 +12,7 @@ export default function Login() {
 
   const router = useRouter();
 
-  async function login() {
+  async function handleLogin() {
     try {
       const data = await login(usuario.login, usuario.senha);
       if (data.token) {
@@ -52,6 +52,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  );
   );
 }
