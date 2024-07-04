@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-star-gray min-h-screen">
+    <div className="bg-star-gray min-h-screen text-white">
       <Navbar />
       <h1 className="font-bold text-3xl text-center my-12">
         Escolha o quarto perfeito para você.

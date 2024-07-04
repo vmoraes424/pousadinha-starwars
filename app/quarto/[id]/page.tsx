@@ -28,7 +28,7 @@ export default function page({ params }: { params: { id: string } }) {
   }, []);
 
   return (
-    <div className="bg-star-gray h-screen">
+    <div className="bg-star-gray h-screen text-white">
       <Navbar />
       <div className="flex flex-col m-auto gap-24 w-[80%] mt-24 lg:flex-row">
         <div className="w-full flex flex-col max-h-full lg:w-1/2">
@@ -40,7 +40,7 @@ export default function page({ params }: { params: { id: string } }) {
             </div>
             <div className="flex gap-1">
               <Star />
-              <p>4,9</p>
+              <p>{quarto?.media ? quarto?.media : "0,00"}</p>
             </div>
           </div>
         </div>
@@ -57,6 +57,7 @@ export default function page({ params }: { params: { id: string } }) {
                 Comentar
               </button>
             </div>
+            <Comentario params={params} />
           </div>
         </div>
       </div>
