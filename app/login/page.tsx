@@ -15,7 +15,7 @@ export default function Login() {
   async function handleLogin() {
     try {
       const data = await login(usuario.login, usuario.senha);
-      if (data.token) {
+      if (data?.token) {
         router.push("/");
       }
     } catch (error) {

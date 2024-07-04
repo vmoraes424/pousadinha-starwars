@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Comentario from "@/app/components/Comentario";
 import Navbar from "@/app/components/Navbar";
 import { Quarto } from "@/app/hooks/useQuarto";
 import { Star } from "lucide-react";
